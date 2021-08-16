@@ -7,6 +7,10 @@
     <groupId>pers-ljd</groupId>
     <artifactId>Blog</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>blog-blog_main</module>
+        <module>blog-nacos</module>
+    </modules>
     <packaging>pom</packaging>
 
     <parent>
@@ -16,8 +20,95 @@
         <relativePath/>
     </parent>
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <!-- 指定项目版本 -->
+        <revision>1.0-SNAPSHOT</revision>
+        <!-- 指定SpringBoot版本 -->
+        <springboot.version>2.2.5.RELEASE</springboot.version>
+        <!-- 指定SpringCloud版本 -->
+        <springcloud.version>Hoxton.SR3</springcloud.version>
+        <!-- 指定SpringCloudAlibaba版本 -->
+        <springcloudalibaba.version>2.2.1.RELEASE</springcloudalibaba.version>
+        <!-- 指定JDK版本 -->
+        <java-jdk.version>1.8</java-jdk.version>
+        <!-- 指定Lombok版本 -->
+        <lombok.version>1.18.16</lombok.version>
     </properties>
 
+    <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
+<!--            <version>2.2.1.RELEASE</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <version>2.2.1.RELEASE</version>
+        </dependency>
+        <!--引入注册中心阿里巴巴-->
+        <!--sentinel-->
+        <!--    <dependency>-->
+        <!--        <groupId>org.springframework.cloud</groupId>-->
+        <!--        <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>-->
+        <!--    </dependency>-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${springboot.version}</version>
+        </dependency>
+    </dependencies>
+
+    <!-- dependencyManagement: 对所依赖jar包进行版本管理的管理器,声明依赖，并不实现引入.
+     1.不在子项目中声明依赖，是不会从父项目中继承下来的
+     2.只有在子项目中写了该依赖项，并且没有指定具体版本，才会从父项目中继承该项
+     3.子项目中指定了版本号，那么会使用子项目中指定的jar版本。
+     主要: 主要管理版本
+     -->
+    <dependencyManagement>
+        <dependencies>
+            <!--            <dependency>-->
+            <!--                <groupId>org.springframework</groupId>-->
+            <!--                <artifactId>spring-framework-bom</artifactId>-->
+            <!--                <version>${spring.version}</version>-->
+            <!--                <type>pom</type>-->
+            <!--                <scope>import</scope>-->
+            <!--            </dependency>-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${springboot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${springcloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${springcloudalibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>
