@@ -15,6 +15,10 @@
         <version>2.2.5.RELEASE</version>
         <relativePath/>
     </parent>
+    <modules>
+        <module>blog-blog_main</module>
+        <module>blog-common</module>
+    </modules>
     <properties>
         <!-- 指定项目版本 -->
         <revision>1.0-SNAPSHOT</revision>
